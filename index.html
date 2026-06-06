@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>다해 김정란 개인전</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+
+<!-- Image Viewer Modal -->
+<div id="image-viewer" class="viewer-hidden">
+    <div class="viewer-backdrop"></div>
+    <button class="viewer-close" aria-label="닫기">&times;</button>
+    <div class="viewer-content"><img id="viewer-img" src="" alt="확대된 작품"></div>
+</div>
+
+<div id="deck-container">
+    <!--#include file="src/slides/01-cover.html"-->
+    <!--#include file="src/slides/02-artist.html"-->
+    <!--#include file="src/slides/03-statement.html"-->
+    <!--#include file="src/slides/04-gallery1.html"-->
+    <!--#include file="src/slides/05-gallery2.html"-->
+    <!--#include file="src/slides/06-gallery3.html"-->
+</div>
+
+<div id="slide-counter">1 / 6</div>
+
+<div id="nav-controls">
+    <button class="nav-btn" id="prev-btn" aria-label="이전 슬라이드">←</button>
+    <button class="nav-btn" id="next-btn" aria-label="다음 슬라이드">→</button>
+</div>
+
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
