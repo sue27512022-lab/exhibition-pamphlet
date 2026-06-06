@@ -35,11 +35,24 @@ function showControls() {
         counter.classList.remove('visible');
     }, 3000);
 }
-// 터치나 클릭 시 컨트롤 표시
+function hideControls() {
+    navControls.classList.remove('visible');
+    counter.classList.remove('visible');
+    clearTimeout(hideTimeout);
+}
+function toggleControls() {
+    if (navControls.classList.contains('visible')) {
+        hideControls();
+    } else {
+        showControls();
+    }
+}
+// 터치나 클릭 시 컨트롤 토글
 ['click', 'touchstart'].forEach(evt => {
     container.addEventListener(evt, (e) => {
-        // 버튼 자체 클릭 시에는 타이머 갱신만 하고 이벤트 전파 중단하지 않음
-        showControls();
+        // 이미지 줌 이벤트와 겹치지 않도록 주의 (필요시 e.target 체크)
+        if (e.target.classList.contains('zoomable')) return;
+        toggleControls();
     }, {passive: true});
 });
 // 초기 실행 시 잠깐 보여줌
