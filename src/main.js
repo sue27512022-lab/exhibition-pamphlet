@@ -40,21 +40,35 @@ function hideControls() {
     counter.classList.remove('visible');
     clearTimeout(hideTimeout);
 }
-function toggleControls() {
+function toggleControls(e) {
+    if (e) {
+        if (e.target.closest('#nav-controls') || e.target.closest('#slide-counter') || e.target.classList.contains('zoomable')) return;
+    }
     if (navControls.classList.contains('visible')) {
         hideControls();
     } else {
         showControls();
     }
 }
-// 터치나 클릭 시 컨트롤 토글
-['click', 'touchstart'].forEach(evt => {
-    container.addEventListener(evt, (e) => {
-        // 이미지 줌 이벤트와 겹치지 않도록 주의 (필요시 e.target 체크)
-        if (e.target.classList.contains('zoomable')) return;
-        toggleControls();
-    }, {passive: true});
+
+// 터치 기기에서 즉각적인 반응을 위해 touchend 사용
+container.addEventListener('touchend', (e) => {
+    // 줌 동작 중이거나 여러 손가락일 때는 무시
+    if (e.touches.length > 0) return;
+    
+    // 버튼, 카운터, 이미지 줌 클릭 시에는 토글하지 않음
+    if (e.target.closest('#nav-controls') || e.target.closest('#slide-counter') || e.target.classList.contains('zoomable')) return;
+
+    // 브라우저의 기본 click 이벤트 발생을 막아 중복 토글(Ghost Click) 방지
+    e.preventDefault();
+    toggleControls();
+}, {passive: false});
+
+// PC 환경을 위해 click 이벤트 유지 (touchend에서 preventDefault를 했으므로 모바일에서는 중복 실행 안 됨)
+container.addEventListener('click', (e) => {
+    toggleControls(e);
 });
+
 // 초기 실행 시 잠깐 보여줌
 showControls();
 
