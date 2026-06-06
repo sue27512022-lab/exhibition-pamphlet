@@ -23,6 +23,28 @@ window.addEventListener('touchend',e=>{
 },{passive:true});
 resize();update();
 
+// Auto-hide Controls
+const navControls = document.getElementById('nav-controls');
+let hideTimeout;
+function showControls() {
+    navControls.classList.add('visible');
+    counter.classList.add('visible');
+    clearTimeout(hideTimeout);
+    hideTimeout = setTimeout(() => {
+        navControls.classList.remove('visible');
+        counter.classList.remove('visible');
+    }, 3000);
+}
+// 터치나 클릭 시 컨트롤 표시
+['click', 'touchstart'].forEach(evt => {
+    container.addEventListener(evt, (e) => {
+        // 버튼 자체 클릭 시에는 타이머 갱신만 하고 이벤트 전파 중단하지 않음
+        showControls();
+    }, {passive: true});
+});
+// 초기 실행 시 잠깐 보여줌
+showControls();
+
 // Viewer Logic
 const viewer=document.getElementById('image-viewer'), vImg=document.getElementById('viewer-img'), vClose=document.querySelector('.viewer-close'), vBg=document.querySelector('.viewer-backdrop');
 let sc=1, pX=0, pY=0, isD=false, stX, stY, iDist=0, iSc=1;

@@ -106,10 +106,12 @@ h2{font-family:var(--font-display);font-size:80px;font-weight:600;letter-spacing
 .work-caption-small{font-family:var(--font-display);font-size:20px;color:var(--fg);letter-spacing:.1em;font-weight:500;margin:0}
 .season-caption{color:#000;font-family:var(--font-display);font-size:20px;font-weight:500;letter-spacing:.1em;margin-top:8px}
 
-#nav-controls{position:fixed;bottom:40px;right:40px;display:flex;gap:20px;z-index:100}
+#nav-controls{position:fixed;bottom:40px;right:40px;display:flex;gap:20px;z-index:100;opacity:0;pointer-events:none;transition:opacity 0.3s ease}
+#nav-controls.visible{opacity:1;pointer-events:auto}
 .nav-btn{background:rgba(255,255,255,0.5);backdrop-filter:blur(5px);border:1px solid rgba(0,0,0,0.1);color:var(--muted);width:70px;height:70px;border-radius:50%;display:flex;justify-content:center;align-items:center;cursor:pointer;font-size:32px;transition:all .2s;user-select:none;font-family:-apple-system,sans-serif;line-height:1;padding-bottom:6px}
 .nav-btn:hover{background:rgba(255,255,255,0.7);transform:translateY(-2px)}
-#slide-counter{position:fixed;bottom:40px;left:40px;font-size:22px;color:var(--muted);font-weight:500;letter-spacing:.1em;z-index:100;background:rgba(255,255,255,0.5);padding:10px 20px;border-radius:20px;backdrop-filter:blur(5px);font-family:-apple-system,sans-serif;display:flex;align-items:center;justify-content:center;height:44px}
+#slide-counter{position:fixed;bottom:40px;left:40px;font-size:22px;color:var(--muted);font-weight:500;letter-spacing:.1em;z-index:100;background:rgba(255,255,255,0.5);padding:10px 20px;border-radius:20px;backdrop-filter:blur(5px);font-family:-apple-system,sans-serif;display:flex;align-items:center;justify-content:center;height:44px;opacity:0;pointer-events:none;transition:opacity 0.3s ease}
+#slide-counter.visible{opacity:1;pointer-events:auto}
 ::-webkit-scrollbar{display:none}
 
 /* Interaction: Hover & Image Viewer */
