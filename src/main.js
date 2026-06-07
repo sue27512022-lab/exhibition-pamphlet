@@ -30,8 +30,10 @@ window.addEventListener('keydown',e=>{
     if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();next();}
     if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();prev();}
 });
-prevBtn.addEventListener('click',e=>{e.stopPropagation();prev();});
-nextBtn.addEventListener('click',e=>{e.stopPropagation();next();});
+prevBtn.addEventListener('click',e=>{e.stopPropagation();prev();showControls();});
+nextBtn.addEventListener('click',e=>{e.stopPropagation();next();showControls();});
+counter.addEventListener('click', e => { e.stopPropagation(); showControls(); });
+counter.addEventListener('touchend', e => { e.stopPropagation(); e.preventDefault(); showControls(); }, {passive: false});
 let tsX=0;
 window.addEventListener('touchstart',e=>{tsX=e.changedTouches[0].screenX;},{passive:true});
 window.addEventListener('touchend',e=>{

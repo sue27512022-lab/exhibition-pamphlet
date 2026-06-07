@@ -33,7 +33,7 @@ h2{font-family:var(--font-display);font-size:80px;font-weight:600;letter-spacing
 .bio-list{list-style:none;display:inline-block;text-align:left;width:100%;padding-left:50px;margin-top:0}
 .bio-list li{font-size:26px;line-height:1.6;margin-bottom:12px;position:relative;color:var(--fg);word-break:keep-all;font-weight:400}
 .bio-year{font-weight:600;color:var(--accent);margin-right:12px;font-family:var(--font-display)}
-.statement{font-size:28px;line-height:1.7;word-break:auto-phrase;margin-bottom:40px;font-weight:300;color:var(--fg);padding:0 20px;text-align:center}
+.statement{font-size:28px;line-height:1.7;word-break:auto-phrase;margin-top:20px;font-weight:300;color:var(--fg);padding:0 20px;text-align:center}
 
 .artist-photo-large{width:100%;max-width:300px;height:auto;margin-top:50px;margin-bottom:15px;margin-left:50px;object-fit:contain}
 .artwork-large{width:100%;max-width:480px;height:auto;margin-top:70px;margin-bottom:70px;object-fit:contain}
