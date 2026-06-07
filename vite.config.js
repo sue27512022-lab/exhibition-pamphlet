@@ -25,6 +25,7 @@ export default defineConfig({
   plugins: [
     htmlIncludePlugin(),
     ViteImageOptimizer({
+      exclude: ['mp2z0vhh-Gemini_Generated_Image_up_2.png'],
       png: { quality: 80 },
       jpg: { quality: 80 },
       jpeg: { quality: 80 },
