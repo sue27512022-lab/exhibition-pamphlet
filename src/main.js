@@ -19,7 +19,28 @@ function update(){
     counter.innerText=`${cur+1} / ${slides.length}`;
     localStorage.setItem('minhwa-deck-pos',cur);
     [cur-1, cur, cur+1].forEach(loadSlideImages);
+
+    // Trigger notification on 4th slide (index 3)
+    if (cur === 3) {
+        showNotification();
+    }
 }
+
+// Notification Logic
+const notification = document.getElementById('global-notification');
+let notificationShown = false;
+
+function showNotification() {
+    if (notificationShown) return;
+    notification.classList.remove('notification-hidden');
+    notificationShown = true;
+}
+
+function hideNotification() {
+    notification.classList.add('notification-hidden');
+}
+
+notification.addEventListener('click', hideNotification);
 function next(){if(cur<slides.length-1){cur++;update();}}
 function prev(){if(cur>0){cur--;update();}}
 function resize(){const scale=Math.min(window.innerWidth/SW,window.innerHeight/SH);container.style.transform=`translate(-50%,-50%) scale(${scale})`;}
@@ -110,6 +131,7 @@ document.querySelectorAll('.zoomable').forEach(img=>{
         sc=1; pX=0; pY=0; uT();
         // 모바일 백 버튼 대응을 위한 히스토리 상태 추가
         window.history.pushState('viewer-open', null, '');
+        hideNotification();
     });
 });
 

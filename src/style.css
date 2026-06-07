@@ -127,3 +127,63 @@ h2{font-family:var(--font-display);font-size:80px;font-weight:600;letter-spacing
 .viewer-content{position:relative;z-index:2001;width:100vw;height:100vh;display:flex;justify-content:center;align-items:center;overflow:hidden;pointer-events:none}
 #viewer-img{max-width:90vw;max-height:90vh;object-fit:contain;transition:transform .1s ease-out;transform-origin:center center;cursor:grab;will-change:transform;box-shadow:0 20px 60px rgba(0,0,0,0.6);pointer-events:auto}
 #viewer-img:active{cursor:grabbing}
+
+/* Global Notification */
+#global-notification {
+    position: fixed;
+    cursor: pointer;
+    top: 50px;
+    right: 40px;
+    z-index: 1000;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+    pointer-events: auto;
+}
+#global-notification.notification-hidden {
+    transform: translateX(120%);
+    opacity: 0;
+    pointer-events: none;
+}
+.notification-content {
+    backdrop-filter: blur(5px);
+    background: #ffffff80;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 15px 20px 15px 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.notification-message {
+    font-size: 18px;
+    color: var(--fg);
+    font-weight: 500;
+}
+.notification-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: var(--muted);
+    cursor: pointer;
+    line-height: 1;
+    padding: 5px;
+    transition: color 0.2s;
+}
+.notification-close:hover {
+    color: var(--fg);
+}
+
+@media (max-width: 600px) {
+    #global-notification {
+        right: 20px;
+        top: 20px;
+        left: 20px;
+    }
+    .notification-content {
+        padding: 12px 15px 12px 20px;
+        justify-content: space-between;
+    }
+    .notification-message {
+        font-size: 16px;
+    }
+}
