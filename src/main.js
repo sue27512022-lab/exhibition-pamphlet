@@ -95,15 +95,40 @@ showControls();
 const viewer=document.getElementById('image-viewer'), vImg=document.getElementById('viewer-img'), vClose=document.querySelector('.viewer-close'), vBg=document.querySelector('.viewer-backdrop');
 let sc=1, pX=0, pY=0, isD=false, stX, stY, iDist=0, iSc=1;
 function uT(){vImg.style.transform=`translate(${pX}px,${pY}px) scale(${sc})`;}
+
+const closeV = (fromPopState = false) => {
+    viewer.classList.add('viewer-hidden');
+    // 사용자가 직접 닫은 경우(버튼/배경/Esc) 추가된 히스토리 상태를 뒤로가기하여 정리
+    if (!fromPopState && window.history.state === 'viewer-open') {
+        window.history.back();
+    }
+};
+
 document.querySelectorAll('.zoomable').forEach(img=>{
     img.addEventListener('click',e=>{
         e.stopPropagation(); vImg.src=e.target.src; viewer.classList.remove('viewer-hidden');
         sc=1; pX=0; pY=0; uT();
+        // 모바일 백 버튼 대응을 위한 히스토리 상태 추가
+        window.history.pushState('viewer-open', null, '');
     });
 });
-const closeV = () => viewer.classList.add('viewer-hidden');
-vClose.addEventListener('click', closeV);
-vBg.addEventListener('click', closeV);
+
+vClose.addEventListener('click', () => closeV());
+vBg.addEventListener('click', () => closeV());
+
+// Esc 키 대응
+window.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && !viewer.classList.contains('viewer-hidden')) {
+        closeV();
+    }
+});
+
+// 모바일 백 버튼(popstate) 대응
+window.addEventListener('popstate', e => {
+    if (!viewer.classList.contains('viewer-hidden')) {
+        closeV(true);
+    }
+});
 
 vImg.addEventListener('pointerdown',e=>{isD=true;stX=e.clientX-pX;stY=e.clientY-pY;vImg.setPointerCapture(e.pointerId);});
 vImg.addEventListener('pointermove',e=>{if(!isD)return;pX=e.clientX-stX;pY=e.clientY-stY;uT();});
