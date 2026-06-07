@@ -2,7 +2,24 @@ const slides=document.querySelectorAll('.slide'),counter=document.getElementById
 const SW=864,SH=1440;
 let cur=parseInt(localStorage.getItem('minhwa-deck-pos'))||0;
 if(cur>=slides.length)cur=0;
-function update(){slides.forEach((s,i)=>s.classList.toggle('active',i===cur));counter.innerText=`${cur+1} / ${slides.length}`;localStorage.setItem('minhwa-deck-pos',cur);}
+function loadSlideImages(idx) {
+    if (idx < 0 || idx >= slides.length) return;
+    const s = slides[idx];
+    if (s.dataset.bg) {
+        s.style.backgroundImage = `url('${s.dataset.bg}')`;
+        delete s.dataset.bg;
+    }
+    s.querySelectorAll('img[data-src]').forEach(img => {
+        img.src = img.dataset.src;
+        delete img.dataset.src;
+    });
+}
+function update(){
+    slides.forEach((s,i)=>s.classList.toggle('active',i===cur));
+    counter.innerText=`${cur+1} / ${slides.length}`;
+    localStorage.setItem('minhwa-deck-pos',cur);
+    [cur-1, cur, cur+1].forEach(loadSlideImages);
+}
 function next(){if(cur<slides.length-1){cur++;update();}}
 function prev(){if(cur>0){cur--;update();}}
 function resize(){const scale=Math.min(window.innerWidth/SW,window.innerHeight/SH);container.style.transform=`translate(-50%,-50%) scale(${scale})`;}

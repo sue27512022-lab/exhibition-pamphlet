@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import { viteSingleFile } from 'vite-plugin-singlefile';
+import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 import fs from 'fs';
 import path from 'path';
 
@@ -23,6 +24,11 @@ function htmlIncludePlugin() {
 export default defineConfig({
   plugins: [
     htmlIncludePlugin(),
+    ViteImageOptimizer({
+      png: { quality: 80 },
+      jpg: { quality: 80 },
+      jpeg: { quality: 80 },
+    }),
     viteSingleFile()
   ]
 });
